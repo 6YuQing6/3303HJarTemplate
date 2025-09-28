@@ -273,8 +273,10 @@ void leftMiddleTest() {
   wait(2, seconds);
   MotorIntakeMiddle.stop();
   MotorBottomInRubber.stop();
-
+  chassis.drive_distance(48);
+  chassis.turn_to_angle(135);
   loader();
+
 }
 
 void loader() {
