@@ -184,7 +184,35 @@ void pre_auton() {
  * drive_test(), for example, with your own auton function you created in
  * autons.cpp and declared in autons.h.
  */
+void loader() {
+  chassis.set_heading(0);
+  // starts directly in front of loader for testing
+  LeftDriveSmart.setVelocity(100, percent);
+  RightDriveSmart.setVelocity(100, percent);
+  PistonBottom.set(true);
+  MotorIntakeMiddle.spin(forward, 100, percent);
+  MotorBottomInRubber.spin(reverse, 100, percent);
+  // intakes from loader
+  chassis.set_drive_exit_conditions(1, 300, 500);
+  chassis.set_drive_constants(10, 1.5, 0, 10, 0);
+  chassis.drive_distance(17);
+  wait(0.8, seconds);
+  chassis.set_drive_exit_conditions(1.5, 300, 5000);
+  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  // MotorBottomInRubber.stop();
+  // MotorIntakeMiddle.stop();
+  chassis.drive_distance(-10);
+  chassis.turn_to_angle(-180);
+  PistonBottom.set(false);
+  PistonTop.set(false);
+  wait(0.5, seconds);
+  chassis.drive_distance(15);
+  // loads long goal
+  MotorIntakeMiddle.spin(forward, 100, percent);
+  MotorBottomInRubber.spin(forward, 100, percent);
+  MotorTopOut.spin(forward, 100, percent);
 
+}
 
 void rightMiddle() {
    // intakes ball
@@ -221,21 +249,21 @@ void rightMiddleTest() {
   PistonTop.set(true);
   LeftDriveSmart.setVelocity(25, percent);
   RightDriveSmart.setVelocity(25, percent);
-  chassis.drive_distance(10);
+  chassis.drive_distance(25);
   chassis.turn_to_angle(16);
-  chassis.drive_distance(10, 16, 2, 2);
+  chassis.drive_distance(15, 16, 2, 2);
   wait(2, seconds);
   MotorIntakeMiddle.stop();
   MotorBottomInRubber.stop();
   // go to middle goal across
   chassis.turn_to_angle(-45);
-  chassis.drive_distance(6.5);
+  chassis.drive_distance(8);
   MotorIntakeMiddle.spin(reverse, 100, percent);
   MotorBottomInRubber.spin(forward, 30, percent);
   wait(3, seconds);
   LeftDriveSmart.setVelocity(15, percent);
   RightDriveSmart.setVelocity(15, percent);
-  chassis.drive_distance(2);
+  chassis.drive_distance(6);
   wait(2, seconds);
   MotorIntakeMiddle.stop();
   MotorBottomInRubber.stop();
@@ -248,68 +276,44 @@ void rightMiddleTest() {
 
 void leftMiddleTest() {
   
-  chassis.set_drive_constants(4, 1.5, 0, 10, 0);
+  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   // chassis.turn_to_angle(8);
   MotorIntakeMiddle.spin(forward, 100, percent);
   MotorBottomInRubber.spin(reverse, 100, percent);
   PistonTop.set(true);
   LeftDriveSmart.setVelocity(25, percent);
   RightDriveSmart.setVelocity(25, percent);
-  chassis.drive_distance(10);
+  chassis.drive_distance(24);
   chassis.turn_to_angle(-16);
-  chassis.drive_distance(11, -16, 2, 2);
-  wait(2, seconds);
+  chassis.drive_distance(17, -16, 2, 2);
+  wait(1, seconds);
   MotorIntakeMiddle.stop();
   MotorBottomInRubber.stop();
   // go to middle goal across
   chassis.turn_to_angle(45);
-  chassis.drive_distance(6.5);
+  chassis.drive_distance(9);
   MotorIntakeMiddle.spin(forward, 80, percent);
   MotorBottomInRubber.spin(forward, 100, percent);
-  wait(3, seconds);
-  LeftDriveSmart.setVelocity(15, percent);
-  RightDriveSmart.setVelocity(15, percent);
-  chassis.drive_distance(2);
   wait(2, seconds);
+  LeftDriveSmart.setVelocity(60, percent);
+  RightDriveSmart.setVelocity(60, percent);
+  chassis.drive_distance(3);
+  // wait(0.5, seconds);
   MotorIntakeMiddle.stop();
   MotorBottomInRubber.stop();
-  chassis.drive_distance(48);
-  chassis.turn_to_angle(135);
+  chassis.drive_distance(-48);
+  chassis.turn_to_angle(180);
+  chassis.drive_distance(-5);
   loader();
 
 }
 
-void loader() {
-  // starts directly in front of loader for testing
-  LeftDriveSmart.setVelocity(100, percent);
-  RightDriveSmart.setVelocity(100, percent);
-  PistonBottom.set(true);
-  MotorIntakeMiddle.spin(forward, 100, percent);
-  MotorBottomInRubber.spin(reverse, 100, percent);
-  // intakes from loader
-  chassis.set_drive_exit_conditions(1, 300, 500);
-  chassis.set_drive_constants(8, 1.5, 0, 10, 0);
-  chassis.drive_distance(15);
-  chassis.set_drive_exit_conditions(1.5, 300, 5000);
-  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
-  wait(1.5, seconds);
-  // MotorBottomInRubber.stop();
-  // MotorIntakeMiddle.stop();
-  chassis.drive_distance(-5);
-  chassis.turn_to_angle(180);
-  PistonBottom.set(false);
-  chassis.drive_distance(10);
-  // loads long goal
-  MotorIntakeMiddle.spin(forward, 100, percent);
-  MotorBottomInRubber.spin(forward, 100, percent);
-  MotorTopOut.spin(forward, 100, percent);
 
-}
 
 void autonomous(void) {
   // auto_started = true;
   Brain.Screen.print("HIHIHIHI");
-  loader();
+  leftMiddleTest();
 //   switch(current_auton_selection){ 
 //     case 0:
 //       rightMiddle();
