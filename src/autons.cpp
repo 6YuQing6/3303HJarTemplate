@@ -12,7 +12,7 @@ void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   // chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   // too fast slowing down too slow
-  chassis.set_drive_constants(6,1.5, 0, 10, 0);
+  chassis.set_drive_constants(12, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_turn_constants(8, .4, .03, 3.68, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);

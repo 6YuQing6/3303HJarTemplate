@@ -196,7 +196,7 @@ void loader() {
   chassis.set_drive_exit_conditions(1, 300, 500);
   chassis.set_drive_constants(10, 1.5, 0, 10, 0);
   chassis.drive_distance(17);
-  wait(0.8, seconds);
+  wait(0.6, seconds);
   chassis.set_drive_exit_conditions(1.5, 300, 5000);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   // MotorBottomInRubber.stop();
@@ -205,12 +205,13 @@ void loader() {
   chassis.turn_to_angle(-180);
   PistonBottom.set(false);
   PistonTop.set(false);
-  wait(0.5, seconds);
-  chassis.drive_distance(15);
+  wait(0.4, seconds);
+  chassis.drive_distance(16);
   // loads long goal
   MotorIntakeMiddle.spin(forward, 100, percent);
-  MotorBottomInRubber.spin(forward, 100, percent);
+  MotorBottomInRubber.spin(forward, 50, percent);
   MotorTopOut.spin(forward, 100, percent);
+
 
 }
 
@@ -276,34 +277,38 @@ void rightMiddleTest() {
 
 void leftMiddleTest() {
   
-  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  chassis.set_drive_constants(9, 1.5, 0, 10, 0);
   // chassis.turn_to_angle(8);
-  MotorIntakeMiddle.spin(forward, 100, percent);
+  MotorIntakeMiddle.spin(forward, 70, percent);
   MotorBottomInRubber.spin(reverse, 100, percent);
-  PistonTop.set(true);
-  LeftDriveSmart.setVelocity(25, percent);
-  RightDriveSmart.setVelocity(25, percent);
-  chassis.drive_distance(24);
-  chassis.turn_to_angle(-16);
-  chassis.drive_distance(17, -16, 2, 2);
-  wait(1, seconds);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
+  PistonTop.set(false);
+  LeftDriveSmart.setVelocity(20, percent);
+  RightDriveSmart.setVelocity(20, percent);
+  chassis.drive_distance(13);
+  chassis.turn_to_angle(-30);
+  chassis.drive_distance(12, -30, 2, 2);
+  wait(0.5, seconds);
+  // MotorIntakeMiddle.stop();
+  // MotorBottomInRubber.stop();
   // go to middle goal across
+  LeftDriveSmart.setVelocity(35, percent);
+  RightDriveSmart.setVelocity(35, percent);
   chassis.turn_to_angle(45);
-  chassis.drive_distance(9);
-  MotorIntakeMiddle.spin(forward, 80, percent);
+  chassis.drive_distance(11);
+  MotorIntakeMiddle.spin(forward, 60, percent);
   MotorBottomInRubber.spin(forward, 100, percent);
-  wait(2, seconds);
-  LeftDriveSmart.setVelocity(60, percent);
-  RightDriveSmart.setVelocity(60, percent);
-  chassis.drive_distance(3);
+  MotorTopOut.spin(reverse,50,percent);
+  wait(2.1, seconds);
+  LeftDriveSmart.setVelocity(90, percent);
+  RightDriveSmart.setVelocity(90, percent);
+  // chassis.drive_distance(1);
   // wait(0.5, seconds);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
-  chassis.drive_distance(-48);
+  //MotorIntakeMiddle.stop();
+  //MotorBottomInRubber.stop();
+  //MotorTopOut.stop();
+  chassis.drive_distance(-43.5);
   chassis.turn_to_angle(180);
-  chassis.drive_distance(-5);
+  // chassis.drive_distance(-5);
   loader();
 
 }
@@ -367,7 +372,7 @@ bool piston2ButtonPrev = false;
 // Add new definitions for motor state
 enum MotorDirection { STOPPED = 0, CLOCKWISE = 1, COUNTERCLOCKWISE = 2 };
 int motor1State = CLOCKWISE;         // Motor4 (Motor1) starts clockwise
-int motor10State = COUNTERCLOCKWISE;   // Motor10 starts counterclockwise
+int motor10State = CLOCKWISE;   // Motor10 starts counterclockwise
 bool motor1UpPrev = false, motor1DownPrev = false;
 bool motor10L1Prev = false, motor10L2Prev = false;
 void usercontrol(void) {
