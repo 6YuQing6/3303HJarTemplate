@@ -216,66 +216,6 @@ void loader() {
 
 }
 
-void rightMiddle() {
-   // intakes ball
-  chassis.set_drive_constants(4, 1.5, 0, 10, 0);
-  // chassis.turn_to_angle(8);
-  MotorIntakeMiddle.spin(forward, 100, percent);
-  MotorBottomInRubber.spin(reverse, 100, percent);
-  PistonTop.set(true);
-  LeftDriveSmart.setVelocity(25, percent);
-  RightDriveSmart.setVelocity(25, percent);
-  chassis.drive_distance(27);
-  chassis.turn_to_angle(15);
-  chassis.drive_distance(15, 15, 2, 2);
-  wait(2, seconds);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
-  // go to middle goal across
-  chassis.turn_to_angle(-45);
-  chassis.drive_distance(8);
-  MotorIntakeMiddle.spin(reverse, 100, percent);
-  MotorBottomInRubber.spin(forward, 50, percent);
-  wait(2, seconds);
-  chassis.drive_distance(6);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
-}
-
-void rightMiddleTest() {
-   // intakes ball
-  chassis.set_drive_constants(4, 1.5, 0, 10, 0);
-  // chassis.turn_to_angle(8);
-  MotorIntakeMiddle.spin(forward, 100, percent);
-  MotorBottomInRubber.spin(reverse, 100, percent);
-  PistonTop.set(true);
-  LeftDriveSmart.setVelocity(25, percent);
-  RightDriveSmart.setVelocity(25, percent);
-  chassis.drive_distance(25);
-  chassis.turn_to_angle(16);
-  chassis.drive_distance(15, 16, 2, 2);
-  wait(2, seconds);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
-  // go to middle goal across
-  chassis.turn_to_angle(-45);
-  chassis.drive_distance(8);
-  MotorIntakeMiddle.spin(reverse, 100, percent);
-  MotorBottomInRubber.spin(forward, 30, percent);
-  wait(3, seconds);
-  LeftDriveSmart.setVelocity(15, percent);
-  RightDriveSmart.setVelocity(15, percent);
-  chassis.drive_distance(6);
-  wait(2, seconds);
-  MotorIntakeMiddle.stop();
-  MotorBottomInRubber.stop();
-
-  chassis.drive_distance(-20);
-  // chassis.turn_to_angle();
-
-  loader();
-}
-
 void rightMiddleLoader() {
  
   chassis.set_drive_constants(9, 1.5, 0, 10, 0);
@@ -355,37 +295,40 @@ void leftMiddleTest() {
 }
 
 
+// place drivetrain inside of parking zone and run
+void skillsCheese() {
+  MotorIntakeMiddle.spin(forward, 100, percent);
+}
+
+// place drivetrain next to parking zone and it will drive into the zone, pushing balls out
+void skillsSlightCheese() {
+  PistonBottom.set(true);
+  chassis.drive_distance(20);
+  PistonBottom.set(false);
+}
+
+// copy auton C 
+// https://docs.google.com/presentation/d/1kuT2zs910XhQ_iO0IqNDbCkZTuXEhhGNiHDB0uZsjT4/edit?usp=sharing 
+void skillsFull() {
+
+}
+
 
 void autonomous(void) {
-  // auto_started = true;
+  auto_started = true;
   Brain.Screen.print("HIHIHIHI");
   rightMiddleLoader();
-//   switch(current_auton_selection){ 
-//     case 0:
-//       rightMiddle();
-//       break;
-//     case 1:         
-//       drive_test();
-//       break;
-//     case 2:
-//       turn_test();
-//       break;
-//     case 3:
-//       swing_test();
-//       break;
-//     case 4:
-//       full_test();
-//       break;
-//     case 5:
-//       odom_test();
-//       break;
-//     case 6:
-//       tank_odom_test();
-//       break;
-//     case 7:
-//       holonomic_odom_test();
-//       break;
-//  }
+  switch(current_auton_selection){ 
+    case 0:
+      skillsCheese();
+      break;
+    case 1:         
+      skillsSlightCheese();
+      break;
+    case 2:
+      skillsFull();
+      break;
+ }
 }
 
 /*---------------------------------------------------------------------------*/
