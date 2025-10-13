@@ -358,7 +358,7 @@ void leftMiddleTest() {
 
 void autonomous(void) {
   // auto_started = true;
-  Brain.Screen.print("HIHIHIHI");
+  Brain.Screen.print("Autonomous Control Started");
   rightMiddleLoader();
 //   switch(current_auton_selection){ 
 //     case 0:
