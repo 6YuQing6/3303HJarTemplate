@@ -359,7 +359,7 @@ void leftMiddleTest() {
 void autonomous(void) {
   // auto_started = true;
   Brain.Screen.print("HIHIHIHI");
-  rightMiddleLoader();
+  leftMiddleTest();
 //   switch(current_auton_selection){ 
 //     case 0:
 //       rightMiddle();
