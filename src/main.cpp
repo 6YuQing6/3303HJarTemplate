@@ -212,8 +212,6 @@ void loader() {
   MotorIntakeMiddle.spin(forward, 90, percent);
   MotorBottomInRubber.spin(forward, 100, percent);
   MotorTopOut.spin(forward, 100, percent);
-
-
 }
 
 void rightMiddleLoader() {
@@ -302,9 +300,8 @@ void skillsCheese() {
 
 // place drivetrain next to parking zone and it will drive into the zone, pushing balls out
 void skillsSlightCheese() {
-  PistonBottom.set(true);
-  chassis.drive_distance(20);
-  PistonBottom.set(false);
+  chassis.set_drive_constants(12, 1.5, 0, 10, 0);
+  chassis.drive_distance(-20);
 }
 
 // copy auton C 
