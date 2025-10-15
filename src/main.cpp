@@ -144,34 +144,22 @@ void pre_auton() {
     Brain.Screen.printAt(5, 120, "Selected Auton:");
     switch(current_auton_selection){
       case 0:
-        Brain.Screen.printAt(5, 140, "Auton 1");
+        Brain.Screen.printAt(5, 140, "Right");
         break;
       case 1:
-        Brain.Screen.printAt(5, 140, "Auton 2");
+        Brain.Screen.printAt(5, 140, "Left");
         break;
       case 2:
-        Brain.Screen.printAt(5, 140, "Auton 3");
+        Brain.Screen.printAt(5, 140, "Skills Park");
         break;
       case 3:
-        Brain.Screen.printAt(5, 140, "Auton 4");
-        break;
-      case 4:
-        Brain.Screen.printAt(5, 140, "Auton 5");
-        break;
-      case 5:
-        Brain.Screen.printAt(5, 140, "Auton 6");
-        break;
-      case 6:
-        Brain.Screen.printAt(5, 140, "Auton 7");
-        break;
-      case 7:
-        Brain.Screen.printAt(5, 140, "Auton 8");
+        Brain.Screen.printAt(5, 140, "Skills Park + Remove Balls");
         break;
     }
     if(Brain.Screen.pressing()){
       while(Brain.Screen.pressing()) {}
       current_auton_selection ++;
-    } else if (current_auton_selection == 8){
+    } else if (current_auton_selection == 4){
       current_auton_selection = 0;
     }
     wait(10, msec);
@@ -354,38 +342,33 @@ void leftMiddleTest() {
 
 }
 
+// place drivetrain inside of parking zone and run
+void skillsCheese() {
+  MotorIntakeMiddle.spin(forward, 100, percent);
+}
 
+// place drivetrain next to parking zone and it will drive into the zone, pushing balls out
+void skillsSlightCheese() {
+  chassis.set_drive_constants(12, 1.5, 0, 10, 0);
+  chassis.drive_distance(-20);
+}
 
 void autonomous(void) {
   // auto_started = true;
-  Brain.Screen.print("HIHIHIHI");
-  rightMiddleLoader();
-//   switch(current_auton_selection){ 
-//     case 0:
-//       rightMiddle();
-//       break;
-//     case 1:         
-//       drive_test();
-//       break;
-//     case 2:
-//       turn_test();
-//       break;
-//     case 3:
-//       swing_test();
-//       break;
-//     case 4:
-//       full_test();
-//       break;
-//     case 5:
-//       odom_test();
-//       break;
-//     case 6:
-//       tank_odom_test();
-//       break;
-//     case 7:
-//       holonomic_odom_test();
-//       break;
-//  }
+  switch(current_auton_selection){ 
+    case 0:
+      rightMiddleLoader();
+      break;
+    case 1:         
+      leftMiddleTest();
+      break;
+    case 2:
+      skillsCheese();
+      break;
+    case 3:
+      skillsSlightCheese();
+      break;
+ }
 }
 
 /*---------------------------------------------------------------------------*/
